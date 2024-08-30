@@ -7,7 +7,7 @@ const Form = require('./modals/Form.modal'); // Ensure this path is correct
 
 const app = express();
 
-const url = process.env.MONGO_URL;
+const url = process.env.MONGO_URI;
 
 app.use(cors());
 app.use(express.json());
@@ -105,7 +105,8 @@ app.post('/form', async (req, res) => {
   
 
   
+  const PORT = process.env.PORT || 8001;
 
-app.listen(8001, () => {
-  console.log('App running on port 8001');
-});
+  app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}`);
+  });

@@ -1,59 +1,98 @@
-.report {
-  padding: 20px;
-  background-color: #f0f4f8;
-  min-height: 100vh;
+.report-page {
+  background-color: #e8f0fe;
+  padding: 50px;
+  min-height: 150vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   h1 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #00796b;
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-weight: 700;
   }
 
   .date-picker {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
-
+    margin-bottom: 25px;
+    
     .react-datepicker-wrapper {
       width: auto;
     }
 
     .react-datepicker__input-container input {
-      width: 200px;
-      padding: 10px;
-      border-radius: 4px;
+      width: 180px;
+      padding: 12px 20px;
+      font-size: 18px;
+      border-radius: 8px;
       border: 1px solid #ccc;
-      font-size: 16px;
-      text-align: center;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s, box-shadow 0.3s;
+
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
+      }
     }
   }
 
-  .chart-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+  .meal-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
 
-    .chart {
-      background: #fff;
-      padding: 20px;
+    label {
+      font-size: 18px;
+      color: #34495e;
+      margin-right: 10px;
+      font-weight: 500;
+    }
+
+    select {
+      padding: 10px 15px;
+      font-size: 18px;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      color: #2c3e50;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s;
 
-      h2 {
-        text-align: center;
-        margin-bottom: 10px;
-        color: #00796b;
-        font-family: 'Arial', sans-serif;
-        font-size: 20px;
+      &:hover {
+        border-color: #007bff;
       }
 
-      canvas {
-        max-width: 100%;
-        height: auto;
-        margin: 0 auto;
+      &:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
       }
+    }
+  }
+
+  .chart-box {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    width: 150%;
+    max-width: 800px;
+
+    h2 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 450px !important;
     }
   }
 }

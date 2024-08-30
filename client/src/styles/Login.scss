@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 body {
@@ -67,63 +67,62 @@ body {
       flex-direction: column;
       margin-right: 500px;
     
-       .rating-button {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .rating-button {
+        position: relative; /* This will allow positioning of the emoji */
         border: 2px solid #ccc;
         border-radius: 8px;
-        padding: 20px 90px;
+        padding: 20px 90px; /* Adjust padding to make space for the emoji */
         margin-bottom: 30px;
         font-size: 2rem;
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
-
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    
         // Default colors for each button
         &.excellent {
-          
           background-color: #4caf50; // Green
           color: #fff;
         }
-
+    
         &.good {
           background-color: #67f195; // Blue
           color: #fff;
         }
-
+    
         &.average {
           background-color: #f7e653; // Yellow
           color: #000;
         }
-
+    
         &.bad {
           background-color: #f39843; // Orange
           color: #fff;
         }
-
+    
         &.very-bad {
           background-color: #f15044; // Red
           color: #fff;
         }
-
-        // Style when a button is selected
+    
         &.selected {
           border-color: darken(#000, 15%);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-
-        // Hover effect for all buttons
+    
         &:hover {
           background-color: lighten(#dcdcdc, 5%);
         }
-
+    
         .emoji-icon {
-          margin-left: 10px; /* Space between text and emoji */
-          width: 50px; /* Adjust size of the emoji */
-          height: 50px;
-          flex-shrink: 0; /* Prevent emoji from shrinking */
+          position: absolute;
+          right: -180px; /* Adjust this value to move the emoji further to the right */
+          top: 50%;
+          transform: translateY(-50%); /* Center the emoji vertically */
+          width: 100px;
+          height: 100px;
         }
-        
       }
     }
     
