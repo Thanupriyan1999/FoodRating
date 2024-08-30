@@ -45,27 +45,23 @@ app.post('/form', async (req, res) => {
   });
   
 
-// Endpoint to generate report based on a specific date
-app.get('/report', async (req, res) => {
+  app.get('/report', async (req, res) => {
     try {
       const { date } = req.query;
-  
-      // Convert the date from the query string to a Date object and set the time to 00:00:00
-      const startDate = new Date(date);
-      startDate.setHours(0, 0, 0, 0);
-  
-      // Set the end date to the next day at 00:00:00 to include all ratings from the selected day
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + 1);
+      
+      // Convert the input date to a format that matches the start of the date string in the database
+      const inputDate = new Date(date).toDateString(); // e.g., "Thu Aug 29 2024"
   
       const ratings = await Form.aggregate([
         {
           $match: {
-            date: {
-              $gte: startDate, // Match dates greater than or equal to startDate
-              $lt: endDate, // Match dates less than endDate
-            },
-          },
+            $expr: {
+              $regexMatch: {
+                input: "$date", // Field from the database
+                regex: `^${inputDate}`, // Match the beginning of the date string
+              }
+            }
+          }
         },
         {
           $group: {
@@ -79,14 +75,17 @@ app.get('/report', async (req, res) => {
         },
       ]);
   
+      // Initialize result structure for all meal types with zero counts
       const result = {
         breakfast: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
         lunch: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
         dinner: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
       };
   
+      // Populate result with actual counts from the aggregation
       ratings.forEach(rating => {
-        result[rating._id.toLowerCase()] = {
+        const mealType = rating._id.toLowerCase();
+        result[mealType] = {
           Excellent: rating.Excellent,
           Good: rating.Good,
           Average: rating.Average,
@@ -95,12 +94,16 @@ app.get('/report', async (req, res) => {
         };
       });
   
-      res.json(result); // Send the aggregated data back to the client
+      // Return the result as JSON
+      res.json(result);
     } catch (err) {
       console.error('Error generating report:', err);
       res.status(500).json({ error: 'Failed to generate report' });
     }
   });
+  
+  
+
   
 
 app.listen(8001, () => {

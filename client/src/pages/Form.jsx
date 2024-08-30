@@ -82,36 +82,40 @@ const Form = () => {
   className={`rating-button excellent ${selectedRating === 'Excellent' ? 'selected' : ''}`}
   onClick={() => handleRatingClick('Excellent')}
 >
-  Excellent
-  <img src="../src/assets/excellent.png" alt="Excellent Emoji" className="emoji-icon" />
+Excellent
+  <img src="./assets/excellent.png" alt="Excellent Emoji" className="emoji-icon" />
 
 </button>
-
-
-
           <button
             className={`rating-button good ${selectedRating === 'Good' ? 'selected' : ''}`}
             onClick={() => handleRatingClick('Good')}
           >
             Good
+            <img src="./assets/good.png" alt="Good Emoji" className="emoji-icon" />
+
           </button>
           <button
             className={`rating-button average ${selectedRating === 'Average' ? 'selected' : ''}`}
             onClick={() => handleRatingClick('Average')}
           >
             Average
+            <img src="./assets/average.png" alt="Average Emoji" className="emoji-icon" />
+
           </button>
           <button
             className={`rating-button bad ${selectedRating === 'Bad' ? 'selected' : ''}`}
             onClick={() => handleRatingClick('Bad')}
           >
             Bad
+            <img src="./assets/bad.png" alt="Bad Emoji" className="emoji-icon" />
           </button>
           <button
             className={`rating-button very-bad ${selectedRating === 'Very Bad' ? 'selected' : ''}`}
             onClick={() => handleRatingClick('Very Bad')}
           >
             Very Bad
+            <img src="./assets/very_bad.png" alt="Very Bad Emoji" className="emoji-icon" />
+
           </button>
         </div>
         <div className='keypad'>

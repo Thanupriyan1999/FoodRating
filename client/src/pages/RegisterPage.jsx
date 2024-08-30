@@ -3,7 +3,7 @@ import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Axios from "axios";
+import axios from "axios";
 import "../styles/Report.scss";
 
 const ReportPage = () => {
@@ -16,9 +16,10 @@ const ReportPage = () => {
 
   const fetchRatingsData = async (date) => {
     try {
-      const response = await Axios.get("http://localhost:8001/report", {
+      const response = await axios.get("http://localhost:8001/report", {
         params: { date: date.toISOString().split("T")[0] },
       });
+      console.log(response.data);
       setRatingsData(response.data);
     } catch (err) {
       console.log("Failed to fetch data", err.message);
