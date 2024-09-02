@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema } = require("mongoose");
+const mongoose = require("../Config/mongodb");
 
-const formSchema = new mongoose.Schema({
+const formSchema = new Schema({
   employeeID: {
     type: String,
     required: true,
@@ -19,4 +20,4 @@ const formSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Form', formSchema);
+module.exports = mongoose.model("Form", formSchema);

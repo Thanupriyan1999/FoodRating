@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -7,6 +7,9 @@ import axios from 'axios';
 import '../styles/Report.scss';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
+
 Chart.register(ChartDataLabels);
 
 const ReportPage = () => {
@@ -52,9 +55,7 @@ const ReportPage = () => {
         font: {
           weight: 'bold',
         },
-        formatter: (value, context) => {
-          return value;
-        },
+        formatter: (value) => value,
       },
     },
   };
@@ -72,6 +73,40 @@ const ReportPage = () => {
       },
     ],
   });
+
+  const createPieChartData = (mealType) => ({
+    labels: ['Excellent', 'Good', 'Average', 'Bad', 'Very Bad'],
+    datasets: [
+      {
+        data: Object.values(ratingsData[mealType.toLowerCase()]),
+        backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#FF5722', '#F44336'],
+        borderColor: '#fff',
+        borderWidth: 2,
+      },
+    ],
+  });
+
+  const exportToExcel = () => {
+    const workbook = XLSX.utils.book_new();
+    const dataToExport = [];
+    
+    Object.keys(ratingsData).forEach((meal) => {
+      Object.keys(ratingsData[meal]).forEach((rating) => {
+        dataToExport.push({
+          Date: selectedDate.toISOString().split('T')[0],
+          Meal: meal.charAt(0).toUpperCase() + meal.slice(1),
+          Rating: rating,
+          Count: ratingsData[meal][rating],
+        });
+      });
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Meal Feedback Report');
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
+    saveAs(blob, `Meal_Feedback_Report_${selectedDate.toISOString().split('T')[0]}.xlsx`);
+  };
 
   return (
     <div className="report-page">
@@ -95,9 +130,17 @@ const ReportPage = () => {
           <option value="dinner">Dinner</option>
         </select>
       </div>
+      <button className="export-button" onClick={exportToExcel}>Export to Excel</button>
       <div className="chart-box">
         <h2>{selectedMeal.charAt(0).toUpperCase() + selectedMeal.slice(1)} Ratings</h2>
-        <Bar data={createChartData(selectedMeal)} options={chartOptions} />
+        <div className="chart-container">
+          <div className="bar-chart">
+            <Bar data={createChartData(selectedMeal)} options={chartOptions} />
+          </div>
+          <div className="pie-chart">
+            <Pie data={createPieChartData(selectedMeal)} />
+          </div>
+        </div>
       </div>
     </div>
   );
