@@ -21,6 +21,7 @@ const ReportPage = () => {
     dinner: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
   });
 
+  // Fetch the ratings data based on the selected date
   useEffect(() => {
     const fetchRatingsData = async () => {
       try {
@@ -58,6 +59,7 @@ const ReportPage = () => {
     },
   };
 
+  // Prepare data for Bar chart
   const createChartData = (mealType) => ({
     labels: ['Excellent', 'Good', 'Average', 'Bad', 'Very Bad'],
     datasets: [
@@ -72,6 +74,7 @@ const ReportPage = () => {
     ],
   });
 
+  // Prepare data for Pie chart
   const createPieChartData = (mealType) => ({
     labels: ['Excellent', 'Good', 'Average', 'Bad', 'Very Bad'],
     datasets: [
@@ -84,23 +87,56 @@ const ReportPage = () => {
     ],
   });
 
+  // Function to export data to Excel in the desired format
   const exportToExcel = () => {
     const workbook = XLSX.utils.book_new();
-    const dataToExport = [];
 
-    Object.keys(ratingsData).forEach((meal) => {
-      Object.keys(ratingsData[meal]).forEach((rating) => {
-        dataToExport.push({
-          Date: selectedDate.toISOString().split('T')[0],
-          Meal: meal.charAt(0).toUpperCase() + meal.slice(1),
-          Rating: rating,
-          Count: ratingsData[meal][rating],
-        });
-      });
-    });
+    // Prepare the data in the new format (matching the provided screenshot)
+    const dataToExport = [
+      {
+        Date: selectedDate.toISOString().split('T')[0],
+        Rating: 'Excellent',
+        Breakfast: ratingsData.breakfast.Excellent,
+        Lunch: ratingsData.lunch.Excellent,
+        Dinner: ratingsData.dinner.Excellent
+      },
+      {
+        Date: selectedDate.toISOString().split('T')[0],
+        Rating: 'Good',
+        Breakfast: ratingsData.breakfast.Good,
+        Lunch: ratingsData.lunch.Good,
+        Dinner: ratingsData.dinner.Good
+      },
+      {
+        Date: selectedDate.toISOString().split('T')[0],
+        Rating: 'Average',
+        Breakfast: ratingsData.breakfast.Average,
+        Lunch: ratingsData.lunch.Average,
+        Dinner: ratingsData.dinner.Average
+      },
+      {
+        Date: selectedDate.toISOString().split('T')[0],
+        Rating: 'Bad',
+        Breakfast: ratingsData.breakfast.Bad,
+        Lunch: ratingsData.lunch.Bad,
+        Dinner: ratingsData.dinner.Bad
+      },
+      {
+        Date: selectedDate.toISOString().split('T')[0],
+        Rating: 'VeryBad',
+        Breakfast: ratingsData.breakfast.VeryBad,
+        Lunch: ratingsData.lunch.VeryBad,
+        Dinner: ratingsData.dinner.VeryBad
+      },
+    ];
 
+    // Convert JSON to sheet
     const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+
+    // Add the worksheet to the workbook
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Meal Feedback Report');
+
+    // Generate and save the Excel file
     const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
     const blob = new Blob([excelBuffer], { type: 'application/octet-stream' });
     saveAs(blob, `Meal_Feedback_Report_${selectedDate.toISOString().split('T')[0]}.xlsx`);
@@ -109,9 +145,13 @@ const ReportPage = () => {
   return (
     <div className="report-page">
       <h1>Meal Feedback Report</h1>
+
+      {/* Date Picker */}
       <div className="date-picker">
         <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="MMMM d, yyyy" />
       </div>
+
+      {/* Meal Selector */}
       <div className="meal-selector">
         <label htmlFor="meal-select">Select Meal:</label>
         <select id="meal-select" value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)}>
@@ -120,8 +160,11 @@ const ReportPage = () => {
           <option value="dinner">Dinner</option>
         </select>
       </div>
+
+      {/* Export to Excel Button */}
       <button className="export-button" onClick={exportToExcel}>Export to Excel</button>
       
+      {/* Bar Chart for the selected meal */}
       <div className="chart-box">
         <h2>{selectedMeal.charAt(0).toUpperCase() + selectedMeal.slice(1)} Ratings</h2>
         <div className="chart-container">
@@ -130,6 +173,7 @@ const ReportPage = () => {
           </div>
         </div>
 
+        {/* Pie Charts for all meals */}
         <h2>Pie Charts for All Meals</h2>
         <div className="chart-container">
           <div className="pie-chart">
