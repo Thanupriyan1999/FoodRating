@@ -50,7 +50,7 @@ const Form = () => {
   };
   
   const saveToDatabase = (data) => {
-    Axios.post('http://localhost:8001/form', data)  // Corrected URL
+    Axios.post('http://10.245.27.59:8001/form', data)  // Corrected URL
       .then((res) => {
         console.log('Success:', res);
         alert('Data saved successfully!');  // Show success message

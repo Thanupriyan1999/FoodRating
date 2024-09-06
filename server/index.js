@@ -6,7 +6,10 @@ const Form = require("./modals/Form.modal");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Allows all origins (can restrict to specific IP)
+  methods: ['GET', 'POST'],
+}));
 app.use(express.json());
 
 // Endpoint to handle form submission
@@ -92,6 +95,6 @@ app.get("/report", async (req, res) => {
 
 const PORT = process.env.PORT || 8001;
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`App running on port ${PORT}`);
 });

@@ -24,7 +24,7 @@ const ReportPage = () => {
   useEffect(() => {
     const fetchRatingsData = async () => {
       try {
-        const response = await axios.get('http://localhost:8001/report', {
+        const response = await axios.get('http://10.245.27.59:8001/report', {
           params: { date: selectedDate.toISOString().split('T')[0] },
         });
         setRatingsData(response.data);
