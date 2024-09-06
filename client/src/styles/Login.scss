@@ -1,5 +1,5 @@
 .login {
-  background-image: url('/assets/food9.jpg'); /* Replace with the path to your image */
+  background-image: url('/assets/food9.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -34,17 +34,17 @@ body {
 
     h1 {
       font-size: 4rem;
-      color: #003087; /* Darker blue color */
+      color: #003087;
       margin-bottom: 10px;
       font-weight: bold;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adding shadow to make the text stand out */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     h3 {
       font-size: 3rem;
-      color: #363534; /* Orange background with black text */
+      color: #363534;
       padding: 5px 5ch;
-      background-color: #ffd966; /* Light orange background */
+      background-color: #ffd966;
       border-radius: 8px;
       margin-bottom: 10px;
     }
@@ -52,7 +52,7 @@ body {
     h2 {
       font-size: 3.5rem;
       color: #023a72;
-      background-color: #e0e7ef; /* Light blue background */
+      background-color: #e0e7ef;
       padding: 5px 15px;
       border-radius: 8px;
     }
@@ -65,13 +65,13 @@ body {
     .rating-buttons {
       display: flex;
       flex-direction: column;
-      margin-right: 500px;
-    
+      margin-right: 400px;
+
       .rating-button {
-        position: relative; /* This will allow positioning of the emoji */
+        position: relative;
         border: 2px solid #ccc;
         border-radius: 8px;
-        padding: 20px 90px; /* Adjust padding to make space for the emoji */
+        padding: 20px 90px;
         margin-bottom: 30px;
         font-size: 2rem;
         cursor: pointer;
@@ -79,53 +79,51 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
-    
-        // Default colors for each button
+
         &.excellent {
-          background-color: #4caf50; // Green
+          background-color: #4caf50;
           color: #fff;
         }
-    
+
         &.good {
-          background-color: #67f195; // Blue
+          background-color: #67f195;
           color: #fff;
         }
-    
+
         &.average {
-          background-color: #f7e653; // Yellow
+          background-color: #f7e653;
           color: #000;
         }
-    
+
         &.bad {
-          background-color: #f39843; // Orange
+          background-color: #f39843;
           color: #fff;
         }
-    
+
         &.very-bad {
-          background-color: #f15044; // Red
+          background-color: #f15044;
           color: #fff;
         }
-    
+
         &.selected {
           border-color: darken(#000, 15%);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-    
+
         &:hover {
           background-color: lighten(#dcdcdc, 5%);
         }
-    
+
         .emoji-icon {
           position: absolute;
-          right: -180px; /* Adjust this value to move the emoji further to the right */
+          right: -180px;
           top: 50%;
-          transform: translateY(-50%); /* Center the emoji vertically */
+          transform: translateY(-50%);
           width: 100px;
           height: 100px;
         }
       }
     }
-    
 
     .keypad {
       display: flex;
@@ -172,17 +170,31 @@ body {
           &:hover {
             background-color: #6c89e9;
           }
-        }        
+        }
 
         .enter {
           font-size: 2rem;
           background-color: #01295e;
-          
 
           &:hover {
             background-color: #6c89e9;
           }
         }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+
+      .rating-buttons {
+        margin-right: 0;
+      }
+
+      .keypad {
+        width: 100%;
       }
     }
   }

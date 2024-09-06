@@ -20,11 +20,11 @@
     display: flex;
     justify-content: center;
     margin-bottom: 25px;
-    
+
     .react-datepicker-wrapper {
       width: auto;
     }
-    
+
     .react-datepicker__input-container input {
       width: 180px;
       padding: 12px 20px;
@@ -33,7 +33,7 @@
       border: 1px solid #54e093;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       transition: border-color 0.3s, box-shadow 0.3s;
-    
+
       &:focus {
         border-color: #007bff;
         box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
@@ -45,13 +45,14 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+
     label {
       font-size: 18px;
       color: #34495e;
       margin-right: 10px;
       font-weight: 500;
     }
-    
+
     select {
       padding: 10px 15px;
       font-size: 18px;
@@ -62,11 +63,11 @@
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       cursor: pointer;
       transition: border-color 0.3s, box-shadow 0.3s;
-    
+
       &:hover {
         border-color: #007bff;
       }
-    
+
       &:focus {
         border-color: #007bff;
         box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
@@ -90,7 +91,15 @@
       font-weight: 600;
       text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
+
+    h3 {
+      text-align: center;
+      color: #34495e;
+      margin-bottom: 15px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
     canvas {
       width: 100% !important;
       height: 400px !important;
@@ -125,16 +134,15 @@
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
     transition: background-color 0.3s, box-shadow 0.3s;
-    
+
     &:hover {
       background-color: #0056b3;
       box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
     }
-  
+
     &:focus {
       outline: none;
       box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
     }
   }
-  
 }

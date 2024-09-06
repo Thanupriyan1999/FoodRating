@@ -52,9 +52,7 @@ const ReportPage = () => {
         anchor: 'end',
         align: 'start',
         color: '#fff',
-        font: {
-          weight: 'bold',
-        },
+        font: { weight: 'bold' },
         formatter: (value) => value,
       },
     },
@@ -89,7 +87,7 @@ const ReportPage = () => {
   const exportToExcel = () => {
     const workbook = XLSX.utils.book_new();
     const dataToExport = [];
-    
+
     Object.keys(ratingsData).forEach((meal) => {
       Object.keys(ratingsData[meal]).forEach((rating) => {
         dataToExport.push({
@@ -112,33 +110,39 @@ const ReportPage = () => {
     <div className="report-page">
       <h1>Meal Feedback Report</h1>
       <div className="date-picker">
-        <DatePicker
-          selected={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
-          dateFormat="MMMM d, yyyy"
-        />
+        <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="MMMM d, yyyy" />
       </div>
       <div className="meal-selector">
         <label htmlFor="meal-select">Select Meal:</label>
-        <select
-          id="meal-select"
-          value={selectedMeal}
-          onChange={(e) => setSelectedMeal(e.target.value)}
-        >
+        <select id="meal-select" value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)}>
           <option value="breakfast">Breakfast</option>
           <option value="lunch">Lunch</option>
           <option value="dinner">Dinner</option>
         </select>
       </div>
       <button className="export-button" onClick={exportToExcel}>Export to Excel</button>
+      
       <div className="chart-box">
         <h2>{selectedMeal.charAt(0).toUpperCase() + selectedMeal.slice(1)} Ratings</h2>
         <div className="chart-container">
           <div className="bar-chart">
             <Bar data={createChartData(selectedMeal)} options={chartOptions} />
           </div>
+        </div>
+
+        <h2>Pie Charts for All Meals</h2>
+        <div className="chart-container">
           <div className="pie-chart">
-            <Pie data={createPieChartData(selectedMeal)} />
+            <h3>Breakfast</h3>
+            <Pie data={createPieChartData('breakfast')} />
+          </div>
+          <div className="pie-chart">
+            <h3>Lunch</h3>
+            <Pie data={createPieChartData('lunch')} />
+          </div>
+          <div className="pie-chart">
+            <h3>Dinner</h3>
+            <Pie data={createPieChartData('dinner')} />
           </div>
         </div>
       </div>
