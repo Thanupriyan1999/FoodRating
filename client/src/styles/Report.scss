@@ -1,39 +1,75 @@
 .report-page {
-  background-color: #e8f0fe;
-  padding: 50px;
-  min-height: 150vh;
+  background-color: #f7f9fc; // Softer background color
+  padding: 30px;
+  min-height: 100vh; // Change to a reasonable height for content
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; // Center align content
 
   h1 {
     text-align: center;
-    color: #2c3e50;
-    margin-bottom: 25px;
-    font-size: 32px;
-    font-weight: 700;
-    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #34495e; // Slightly darker color for better readability
+    margin-bottom: 30px;
+    font-size: 36px; // Increase size for better prominence
+    font-weight: bold;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
   }
 
+  // Flex layout for selectors and button for better alignment
+  .selectors-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; // Center align vertically
+    width: 100%;
+    max-width: 1200px; // Limit row width
+    margin-bottom: 25px;
+
+    .date-picker,
+
+
+    .meal-selector {
+      flex: 1;
+    }
+
+    .meal-selector {
+      margin-left: 20px;
+    }
+
+    .export-button {
+      margin-left: auto;
+    }
+  }
+
+  // Date picker styling
   .date-picker {
     display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
+    justify-content: flex-start; // Align date picker to the left
+    margin-bottom: 0;
+    align-items: center;
+
+
+    
+    label {
+      font-size: 18px;
+      color: #34495e;
+      margin-right: 20px;
+    }
 
     .react-datepicker-wrapper {
       width: auto;
     }
 
     .react-datepicker__input-container input {
-      width: 180px;
-      padding: 12px 20px;
-      font-size: 18px;
+      width: 220px;
+      padding: 12px 10px;
+      font-size: 16px;
       border-radius: 8px;
       border: 1px solid #54e093;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
       transition: border-color 0.3s, box-shadow 0.3s;
+      
 
+      &:hover,
       &:focus {
         border-color: #007bff;
         box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
@@ -43,31 +79,24 @@
 
   .meal-selector {
     display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+    align-items: center;
 
     label {
       font-size: 18px;
       color: #34495e;
-      margin-right: 10px;
-      font-weight: 500;
+      margin-right: 20px;
     }
 
     select {
       padding: 10px 15px;
-      font-size: 18px;
+      font-size: 16px;
       border-radius: 8px;
       border: 1px solid #ccc;
       background-color: #ffffff;
-      color: #2c3e50;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: border-color 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s;
 
-      &:hover {
-        border-color: #007bff;
-      }
-
+      &:hover,
       &:focus {
         border-color: #007bff;
         box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
@@ -75,74 +104,77 @@
     }
   }
 
+  // Styled export button
+  .export-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      background-color: #218838;
+      box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    }
+  }
+
+  // Improved chart layout
   .chart-box {
-    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px; // Limit chart box width
     padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(12, 20, 129, 0.74);
-    width: 160%;
-    max-width: 1200px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 
     h2 {
       text-align: center;
       color: #06498b;
       margin-bottom: 20px;
-      font-size: 34px;
+      font-size: 30px;
       font-weight: 600;
-      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h3 {
-      text-align: center;
-      color: #34495e;
-      margin-bottom: 15px;
-      font-size: 24px;
-      font-weight: 500;
+    .bar-chart {
+      width: 50%;
+      margin-bottom: 30px;
     }
 
-    canvas {
-      width: 100% !important;
-      height: 400px !important;
+    .pie-charts {
+      display: flex;
+      justify-content: space-around; // Space out pie charts
+      width: 100%;
+    }
+
+    .pie-chart {
+      flex: 1;
+      max-width: 200px;
     }
   }
 
   .chart-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  .bar-chart {
-    width: 60%;
-    margin-right: 20px;
-  }
-
-  .pie-chart {
-    width: 30%;
-  }
-
-  .export-button {
     margin-bottom: 20px;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-    transition: background-color 0.3s, box-shadow 0.3s;
+    flex-wrap: wrap;
+  }
 
-    &:hover {
-      background-color: #0056b3;
-      box-shadow: 0 6px 12px rgba(0, 123, 255, 0.3);
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    }
+  canvas {
+    width: 100% !important;
+    height: 200px !important; // Adjust canvas size for better view
   }
 }

@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const Form = require("./modals/Form.modal");
+const Form = require("./modals/Form.modal"); // Assuming you have a Mongoose model for Form
 
 const app = express();
 
@@ -12,16 +12,41 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Endpoint to handle form submission
+// Endpoint to handle form submission with validation for one rating per employee per meal per day
 app.post("/form", async (req, res) => {
   try {
     const { employeeID, rating, mealType, date } = req.body;
 
+    // Format the date to ensure it's consistent
+    const formattedDate = new Date(date);
+    formattedDate.setHours(0, 0, 0, 0); // Set to start of the day
+
+    // Get the start and end of the day
+    const startOfDay = new Date(formattedDate);
+    const endOfDay = new Date(formattedDate);
+    endOfDay.setHours(23, 59, 59, 999); // Set to the end of the day
+
+    // Check if the employee has already rated for the specific meal type on the given date
+    const existingRating = await Form.findOne({
+      employeeID,
+      mealType,
+      date: {
+        $gte: startOfDay,  // Start of the day
+        $lt: endOfDay,  // End of the day
+      },
+    });
+
+    if (existingRating) {
+      // If a rating exists for this employee, meal, and date, prevent saving
+      return res.status(400).json({ message: "You have already rated for this meal today." });
+    }
+
+    // If no existing rating, save the new rating
     const newFormEntry = new Form({
       employeeID,
       rating,
       mealType,
-      date: new Date(date),
+      date: new Date(date), // Save the original date
     });
 
     await newFormEntry.save();
@@ -32,6 +57,8 @@ app.post("/form", async (req, res) => {
   }
 });
 
+
+// Endpoint to handle report generation
 app.get("/report", async (req, res) => {
   try {
     const { date } = req.query;
@@ -93,8 +120,8 @@ app.get("/report", async (req, res) => {
   }
 });
 
+// Start the server
 const PORT = process.env.PORT || 8001;
-
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`App running on port ${PORT}`);
 });

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import "../styles/Login.scss";
 import Axios from "axios";
 
-
 const Form = () => {
   const [employeeID, setEmployeeID] = useState("");
   const [selectedRating, setSelectedRating] = useState(null);
   const [mealType, setMealType] = useState("");
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const currentDate = new Date().toLocaleDateString('en-CA'); // Updated to save in 'yyyy-MM-dd' format
 
   useEffect(() => {
@@ -34,7 +34,9 @@ const Form = () => {
     setSelectedRating(rating);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();  // Prevent default form submission and page refresh
+
     if (employeeID.length === 6 && selectedRating !== null) {
       console.log(`Employee ID: ${employeeID}, Rating: ${selectedRating}, Date: ${currentDate}, Meal Type: ${mealType}`);
   
@@ -50,24 +52,29 @@ const Form = () => {
   };
   
   const saveToDatabase = (data) => {
-    Axios.post('http://10.245.27.59:8001/form', data)  // Corrected URL
+    Axios.post('http://10.245.27.59:8001/form', data)
       .then((res) => {
         console.log('Success:', res);
-        alert('Data saved successfully!');  // Show success message
-  
-        // Clear form fields for the next employee
-        setEmployeeID('');
-        setSelectedRating(null);
-  
-        // Optionally reload the page
-        // window.location.reload();
+        setShowSuccessMessage(true);  // Show success message
+
+        // Hide success message after 1 second without refreshing the page
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+          // Clear form fields for the next employee
+          setEmployeeID('');
+          setSelectedRating(null);
+        }, 1000); // Set time to 1 second (1000 ms)
       })
       .catch(err => {
-        console.log('Error:', err);
-        alert('Failed to save data, please try again.');  // Show error message
+        if (err.response && err.response.status === 400) {
+          // Handle case where employee has already rated for this meal today
+          alert(err.response.data.message || 'You have already rated for this meal today.');
+        } else {
+          console.log('Error:', err);
+          alert('Failed to save data, please try again.');
+        }
       });
   };
-  
 
   return (
     <div className='login'>
@@ -76,61 +83,53 @@ const Form = () => {
         <h3>{mealType}</h3>
         <h2>{currentDate}</h2>
       </div>
-      <div className='content'>
-        <div className='rating-buttons'>
-        <button
-  className={`rating-button excellent ${selectedRating === 'Excellent' ? 'selected' : ''}`}
-  onClick={() => handleRatingClick('Excellent')}
->
-Excellent
-  <img src="./assets/excellent.png" alt="Excellent Emoji" className="emoji-icon" />
+      
+      {/* Wrapping the content in a form tag */}
+      <form onSubmit={handleSubmit}>
+        <div className='content'>
+          <div className='rating-buttons'>
+            <button className={`rating-button excellent ${selectedRating === 'Excellent' ? 'selected' : ''}`} type="button" onClick={() => handleRatingClick('Excellent')}>
+              Excellent
+              <img src="./assets/excellent.png" alt="Excellent Emoji" className="emoji-icon" />
+            </button>
+            <button className={`rating-button good ${selectedRating === 'Good' ? 'selected' : ''}`} type="button" onClick={() => handleRatingClick('Good')}>
+              Good
+              <img src="./assets/good.png" alt="Good Emoji" className="emoji-icon" />
+            </button>
+            <button className={`rating-button average ${selectedRating === 'Average' ? 'selected' : ''}`} type="button" onClick={() => handleRatingClick('Average')}>
+              Average
+              <img src="./assets/average.png" alt="Average Emoji" className="emoji-icon" />
+            </button>
+            <button className={`rating-button bad ${selectedRating === 'Bad' ? 'selected' : ''}`} type="button" onClick={() => handleRatingClick('Bad')}>
+              Bad
+              <img src="./assets/bad.png" alt="Bad Emoji" className="emoji-icon" />
+            </button>
+            <button className={`rating-button very-bad ${selectedRating === 'Very Bad' ? 'selected' : ''}`} type="button" onClick={() => handleRatingClick('Very Bad')}>
+              Very Bad
+              <img src="./assets/very_bad.png" alt="Very Bad Emoji" className="emoji-icon" />
+            </button>
+          </div>
 
-</button>
-          <button
-            className={`rating-button good ${selectedRating === 'Good' ? 'selected' : ''}`}
-            onClick={() => handleRatingClick('Good')}
-          >
-            Good
-            <img src="./assets/good.png" alt="Good Emoji" className="emoji-icon" />
-
-          </button>
-          <button
-            className={`rating-button average ${selectedRating === 'Average' ? 'selected' : ''}`}
-            onClick={() => handleRatingClick('Average')}
-          >
-            Average
-            <img src="./assets/average.png" alt="Average Emoji" className="emoji-icon" />
-
-          </button>
-          <button
-            className={`rating-button bad ${selectedRating === 'Bad' ? 'selected' : ''}`}
-            onClick={() => handleRatingClick('Bad')}
-          >
-            Bad
-            <img src="./assets/bad.png" alt="Bad Emoji" className="emoji-icon" />
-          </button>
-          <button
-            className={`rating-button very-bad ${selectedRating === 'Very Bad' ? 'selected' : ''}`}
-            onClick={() => handleRatingClick('Very Bad')}
-          >
-            Very Bad
-            <img src="./assets/very_bad.png" alt="Very Bad Emoji" className="emoji-icon" />
-
-          </button>
-        </div>
-        <div className='keypad'>
-          <div className='keypad-display'>{employeeID}</div>
-          <div className='keypad-buttons'>
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => (
-              <button key={number} onClick={() => handleNumberClick(number)}>
-                {number}
-              </button>
-            ))}
-            <button className='delete' onClick={handleBackspace}>←</button>
-            <button className='enter' onClick={handleSubmit}>Enter</button>
+          <div className='keypad'>
+            <div className='keypad-display'>{employeeID}</div>
+            <div className='keypad-buttons'>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => (
+                <button key={number} type="button" onClick={() => handleNumberClick(number)}>{number}</button>
+              ))}
+              <button className='delete' type="button" onClick={handleBackspace}>←</button>
+              <button className='enter' type="submit">Enter</button> {/* Ensure this is type="submit" */}
+            </div>
           </div>
         </div>
-      </div>
+      </form>
+
+      {/* Success message */}
+      {showSuccessMessage && (
+        <div className='success-message'>
+          Data saved successfully!
+        </div>
+      )}
+
       <a href="/Register">REPORT</a>
     </div>
   );
