@@ -45,7 +45,7 @@ body {
       font-size: 3rem;
       color: #363534;
       padding: 5px 5ch;
-      background-color: #ffd966;
+      background-color: #ffdb6f;
       border-radius: 8px;
       margin-bottom: 10px;
     }
@@ -132,7 +132,7 @@ body {
       align-items: center;
 
       .keypad-display {
-        width: 300px;
+        width: 400px;
         height: 50px;
         background-color: #fff;
         border: 2px solid #ccc;
@@ -169,7 +169,7 @@ body {
           background-color: #fa0015;
 
           &:hover {
-            background-color: #6c89e9;
+            background-color: #f76f6f;
           }
         }
 
@@ -216,4 +216,31 @@ body {
       }
     }
   }
+
+  .report-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8d9eff; // Green background for a positive look
+    color: #1d1a1a; // White text
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2); // Soft shadow for depth
+    transition: background-color 0.3s, box-shadow 0.3s;
+  
+    &:hover {
+      background-color: #c2f3cd; // Darker green on hover
+      box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3); // Increase shadow on hover
+    }
+  
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.5); // Focus effect for accessibility
+    }
+  }
+  
 }

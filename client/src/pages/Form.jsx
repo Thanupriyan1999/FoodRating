@@ -130,7 +130,8 @@ const Form = () => {
         </div>
       )}
 
-      <a href="/Register">REPORT</a>
+<a href="/Register" className="report-button">REPORT</a>
+
     </div>
   );
 };
