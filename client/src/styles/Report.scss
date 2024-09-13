@@ -95,13 +95,13 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-top: 10px; // Reduce spacing
+      margin-top: 0px; // Reduce spacing
 
       .pie-chart {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 30%;
+        width: 100%;
 
         h3 {
           font-size: 1.25rem;
@@ -110,7 +110,7 @@
         }
 
         canvas {
-          max-height: 200px; // Smaller canvas to fit the screen
+          max-height: 300px; // Smaller canvas to fit the screen
         }
       }
     }
