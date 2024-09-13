@@ -185,23 +185,17 @@ body {
     }
   }
 
-
   .success-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #4CAF50;  /* Green color for success */
-    color: white;
-    padding: 15px;
+    background-color: #4CAF50; // Green background for success
+    color: white; // White text
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
     border-radius: 5px;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     font-size: 16px;
     font-weight: bold;
   }
   
-  
-
   @media (max-width: 768px) {
     .content {
       flex-direction: column;
@@ -231,16 +225,15 @@ body {
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2); // Soft shadow for depth
     transition: background-color 0.3s, box-shadow 0.3s;
-  
+
     &:hover {
       background-color: #c2f3cd; // Darker green on hover
       box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3); // Increase shadow on hover
     }
-  
+
     &:focus {
       outline: none;
       box-shadow: 0 0 8px rgba(40, 167, 69, 0.5); // Focus effect for accessibility
     }
   }
-  
 }

@@ -110,28 +110,29 @@ const Form = () => {
             </button>
           </div>
 
-          <div className='keypad'>
-            <div className='keypad-display'>{employeeID}</div>
-            <div className='keypad-buttons'>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => (
-                <button key={number} type="button" onClick={() => handleNumberClick(number)}>{number}</button>
-              ))}
-              <button className='delete' type="button" onClick={handleBackspace}>←</button>
-              <button className='enter' type="submit">Enter</button> {/* Ensure this is type="submit" */}
+          <div className='keypad-wrapper'>
+            {/* Success message positioned on the left */}
+            {showSuccessMessage && (
+              <div className='success-message'>
+                Data saved successfully!
+              </div>
+            )}
+
+            <div className='keypad'>
+              <div className='keypad-display'>{employeeID}</div>
+              <div className='keypad-buttons'>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => (
+                  <button key={number} type="button" onClick={() => handleNumberClick(number)}>{number}</button>
+                ))}
+                <button className='delete' type="button" onClick={handleBackspace}>←</button>
+                <button className='enter' type="submit">Enter</button> {/* Ensure this is type="submit" */}
+              </div>
             </div>
           </div>
         </div>
       </form>
 
-      {/* Success message */}
-      {showSuccessMessage && (
-        <div className='success-message'>
-          Data saved successfully!
-        </div>
-      )}
-
-<a href="/Register" className="report-button">REPORT</a>
-
+      <a href="/Register" className="report-button">REPORT</a>
     </div>
   );
 };

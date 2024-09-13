@@ -5,10 +5,11 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import '../styles/Report.scss';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate for back button functionality
 
 Chart.register(ChartDataLabels);
 
@@ -20,6 +21,8 @@ const ReportPage = () => {
     lunch: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
     dinner: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
   });
+
+  const navigate = useNavigate();  // Initialize useNavigate
 
   useEffect(() => {
     const fetchRatingsData = async () => {
@@ -138,13 +141,11 @@ const ReportPage = () => {
       <h1>Meal Feedback Report</h1>
 
       <div className="selectors-row">
-        {/* Date Picker */}
         <div className="date-picker">
-        <label htmlFor="date-picker">Date:</label>
+          <label htmlFor="date-picker">Date:</label>
           <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} dateFormat="MMMM d, yyyy" />
         </div>
 
-        {/* Meal Selector */}
         <div className="meal-selector">
           <label htmlFor="meal-select">Select Meal:</label>
           <select id="meal-select" value={selectedMeal} onChange={(e) => setSelectedMeal(e.target.value)}>
@@ -154,11 +155,9 @@ const ReportPage = () => {
           </select>
         </div>
 
-        {/* Export Button */}
         <button className="export-button" onClick={exportToExcel}>Export to Excel</button>
       </div>
 
-      {/* Bar Chart and Pie Charts in one row */}
       <div className="chart-box">
         <div className="bar-chart">
           <h2>{selectedMeal.charAt(0).toUpperCase() + selectedMeal.slice(1)} Ratings</h2>
@@ -180,6 +179,9 @@ const ReportPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Back button */}
+      <button className="back-button" onClick={() => navigate(-1)}>Back</button>
     </div>
   );
 };
