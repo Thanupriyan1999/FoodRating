@@ -1,18 +1,3 @@
-.login {
-  background-image: url('/assets/food9.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  padding: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: rgb(255, 255, 255);
-}
-
 body {
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
@@ -21,22 +6,28 @@ body {
   background-color: #f0f8ff;
 }
 
-
-
+// Container for the login page
 .login {
+  background-image: url('/assets/food9.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 20px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  color: #b65151;
+  align-items: center;
+  color: rgb(255, 255, 255);
 
+  // Header section
   .header {
     text-align: center;
     margin-bottom: 20px;
 
     h1 {
-      font-size: 4rem;
+      font-size: 2rem;
       color: #003087;
       margin-bottom: 10px;
       font-weight: bold;
@@ -44,152 +35,152 @@ body {
     }
 
     h3 {
-      font-size: 3rem;
+      font-size: 1.5rem;
       color: #363534;
-      padding: 5px 5ch;
+      padding: 5px 10px;
       background-color: #ffdb6f;
       border-radius: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     h2 {
-      font-size: 3.5rem;
+      font-size: 1.5rem;
       color: #023a72;
       background-color: #e0e7ef;
-      padding: 5px 15px;
+      padding: 10px;
       border-radius: 8px;
     }
   }
 
-  .content {
+  // Content section
+.content {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+
+  // Rating buttons section
+  .rating-buttons {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    width: 120%;
+    margin-right: 20px;
 
-    .rating-buttons {
+    .rating-button {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 9px 15px;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
       display: flex;
-      flex-direction: column;
-      margin-right: 400px;
-
-      .rating-button {
-        position: relative;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        padding: 20px 90px;
-        margin-bottom: 30px;
-        font-size: 2rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        &.excellent {
-          background-color: #4caf50;
-          color: #fff;
-        }
-
-        &.good {
-          background-color: #67f195;
-          color: #fff;
-        }
-
-        &.average {
-          background-color: #f7e653;
-          color: #000;
-        }
-
-        &.bad {
-          background-color: #f39843;
-          color: #fff;
-        }
-
-        &.very-bad {
-          background-color: #f15044;
-          color: #fff;
-        }
-
-        &.selected {
-          border-color: darken(#000, 15%);
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        &:hover {
-          background-color: lighten(#dcdcdc, 5%);
-        }
-
-        .emoji-icon {
-          position: absolute;
-          right: -180px;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 100px;
-          height: 100px;
-        }
-      }
-    }
-
-    .keypad {
-      display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: space-between;
+      text-align: center;
 
-      .keypad-display {
-        width: 400px;
-        height: 50px;
-        background-color: #fff;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        font-size: 2.5rem;
-        text-align: center;
-        line-height: 50px;
-        margin-bottom: 20px;
-        color: #161515;
+      // Emojis
+      .emoji-icon {
+        margin-left: 10px;
+        width: 24px;
+        height: 24px;
       }
 
-      .keypad-buttons {
-        display: grid;
-        grid-template-columns: repeat(3, 80px);
-        grid-gap: 30px;
+      &.excellent {
+        background-color: #4caf50;
+        color: #fff;
+      }
 
-        button {
-          width: 100px;
-          height: 100px;
-          background-color: #011427;
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          font-size: 3rem;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
+      &.good {
+        background-color: #67f195;
+        color: #fff;
+      }
 
-          &:hover {
-            background-color: #5f6061;
-          }
-        }
+      &.average {
+        background-color: #f7e653;
+        color: #000;
+      }
 
-        .delete {
-          background-color: #fa0015;
+      &.bad {
+        background-color: #f39843;
+        color: #fff;
+      }
 
-          &:hover {
-            background-color: #f76f6f;
-          }
-        }
+      &.very-bad {
+        background-color: #f15044;
+        color: #fff;
+      }
 
-        .enter {
-          font-size: 2rem;
-          background-color: #01295e;
-
-          &:hover {
-            background-color: #6c89e9;
-          }
-        }
+      &:hover {
+        background-color: lighten(#dcdcdc, 5%);
       }
     }
   }
 
+  // Keypad section
+  .keypad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .keypad-display {
+      width: 90%;
+      height: 50px;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 1.8rem;
+      text-align: center;
+      line-height: 50px;
+      margin-bottom: 15px;
+      color: #161515;
+    }
+
+    .keypad-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 15px;
+
+      button {
+        width: 80px;
+        height: 60px;
+        background-color: #011427;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.7rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #5f6061;
+        }
+      }
+
+      .delete {
+        background-color: #fa0015;
+
+        &:hover {
+          background-color: #f76f6f;
+        }
+      }
+
+      .enter {
+        background-color: #01295e;
+
+        &:hover {
+          background-color: #6c89e9;
+        }
+      }
+    }
+  }
+}
+
+  // Success message styling
   .success-message {
-    background-color: #4CAF50; // Green background for success
-    color: white; // White text
+    background-color: #4CAF50;
+    color: white;
     padding: 10px;
     margin: 10px 0;
     text-align: center;
@@ -197,45 +188,101 @@ body {
     font-size: 16px;
     font-weight: bold;
   }
-  
-  @media (max-width: 768px) {
-    .content {
-      flex-direction: column;
-      align-items: center;
 
-      .rating-buttons {
-        margin-right: 0;
-      }
-
-      .keypad {
-        width: 100%;
-      }
-    }
-  }
-
+  // Report button
   .report-button {
-    display: inline-block;
     padding: 10px 20px;
-    background-color: #8d9eff; // Green background for a positive look
-    color: #1d1a1a; // White text
-    text-decoration: none;
+    background-color: #8d9eff;
+    color: #1d1a1a;
     font-size: 20px;
     font-weight: 600;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-top: 15px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2); // Soft shadow for depth
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
     transition: background-color 0.3s, box-shadow 0.3s;
 
     &:hover {
-      background-color: #c2f3cd; // Darker green on hover
-      box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3); // Increase shadow on hover
+      background-color: #c2f3cd;
+      box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
     }
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 8px rgba(136, 215, 252, 0.5); // Focus effect for accessibility
+      box-shadow: 0 0 8px rgba(136, 215, 252, 0.5);
+    }
+  }
+
+  // Media queries for responsiveness
+  @media (max-width: 1024px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+
+      .rating-buttons {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header h1 {
+      font-size: 3rem;
+    }
+
+    .header h3 {
+      font-size: 2rem;
+    }
+
+    .header h2 {
+      font-size: 2.5rem;
+    }
+
+    .rating-buttons .rating-button {
+      padding: 10px;
+      font-size: 1.5rem;
+    }
+
+    .keypad .keypad-display {
+      font-size: 1.8rem;
+    }
+
+    .keypad .keypad-buttons button {
+      width: 80px;
+      height: 80px;
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .header h1 {
+      font-size: 2.5rem;
+    }
+
+    .header h3 {
+      font-size: 1.5rem;
+    }
+
+    .header h2 {
+      font-size: 2rem;
+    }
+
+    .rating-buttons .rating-button {
+      padding: 8px;
+      font-size: 1.2rem;
+    }
+
+    .keypad .keypad-display {
+      font-size: 1.5rem;
+    }
+
+    .keypad .keypad-buttons button {
+      width: 70px;
+      height: 70px;
+      font-size: 1.5rem;
     }
   }
 }
