@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const Form = require("./modals/Form.modal"); // Assuming you have a Mongoose model for Form
-
+const Masterdata = require("./modals/Masterdata.modal"); // Import Masterdata model
 const app = express();
 
 app.use(cors({
@@ -16,6 +16,12 @@ app.use(express.json());
 app.post("/form", async (req, res) => {
   try {
     const { employeeID, rating, mealType, date } = req.body;
+
+    // Validate if the employee exists in the Masterdata collection
+    const employeeExists = await Masterdata.findOne({ employeeID });
+    if (!employeeExists) {
+      return res.status(400).json({ message: "Invalid Employee ID" });
+    }
 
     // Format the date to ensure it's consistent
     const formattedDate = new Date(date);
