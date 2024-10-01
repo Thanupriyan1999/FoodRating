@@ -68,10 +68,13 @@ app.post("/form", async (req, res) => {
 app.get("/report", async (req, res) => {
   try {
     const { date } = req.query;
+    
 
     // Convert the input date to a format that matches the start of the date string in the database
     const inputDate = new Date(date).toDateString(); // e.g., "Thu Aug 29 2024"
 
+
+    console.log(inputDate);
     const ratings = await Form.aggregate([
       {
         $match: {
@@ -99,6 +102,8 @@ app.get("/report", async (req, res) => {
       },
     ]);
 
+    console.log(ratings)
+
     // Initialize result structure for all meal types with zero counts
     const result = {
       breakfast: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
@@ -117,7 +122,7 @@ app.get("/report", async (req, res) => {
         VeryBad: rating.VeryBad,
       };
     });
-
+    
     // Return the result as JSON
     res.json(result);
   } catch (err) {
@@ -125,6 +130,73 @@ app.get("/report", async (req, res) => {
     res.status(500).json({ error: "Failed to generate report" });
   }
 });
+
+
+// Endpoint to handle report generation for a date range
+app.get("/report_duration", async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+
+    // Convert startDate and endDate to JavaScript Date objects
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    console.log("Start date:", start);
+    console.log("End date:", end);
+
+    // Fetch all documents and then filter by date range in JavaScript
+    const ratings = await Form.find({});
+
+    // Filter the ratings between the given date range
+    const filteredRatings = ratings.filter(rating => {
+      const ratingDate = new Date(rating.date);
+      return ratingDate >= start && ratingDate <= end;
+    });
+
+    // Initialize result structure for all meal types with zero counts
+    const result = {
+      breakfast: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
+      lunch: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
+      dinner: { Excellent: 0, Good: 0, Average: 0, Bad: 0, VeryBad: 0 },
+    };
+
+    // Iterate over filtered ratings and update counts
+    filteredRatings.forEach(rating => {
+      const mealType = rating.mealType.toLowerCase(); // e.g., 'breakfast', 'lunch', 'dinner'
+
+      // Ensure the mealType exists in the result object
+      if (result[mealType]) {
+        switch (rating.rating) {
+          case 'Excellent':
+            result[mealType].Excellent += 1;
+            break;
+          case 'Good':
+            result[mealType].Good += 1;
+            break;
+          case 'Average':
+            result[mealType].Average += 1;
+            break;
+          case 'Bad':
+            result[mealType].Bad += 1;
+            break;
+          case 'Very Bad':
+            result[mealType].VeryBad += 1;
+            break;
+          default:
+            break;
+        }
+      }
+    });
+
+    console.log("Result:", result);
+
+    res.json(result);
+  } catch (err) {
+    console.error("Error generating report:", err);
+    res.status(500).json({ error: "Failed to generate report" });
+  }
+});
+
 
 // Start the server
 const PORT = process.env.PORT || 8001;

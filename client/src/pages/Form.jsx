@@ -57,7 +57,7 @@ const Form = () => {
         console.log('Success:', res);
         setShowSuccessMessage(true);  // Show success message
 
-        // Hide success message after 1 second without refreshing the page
+        // Hide success message after 1 second without refresshing the page
         setTimeout(() => {
           setShowSuccessMessage(false);
           // Clear form fields for the next employee
@@ -132,7 +132,8 @@ const Form = () => {
         </div>
       </form>
 
-      <a href="/Register" className="report-button">REPORT</a>
+      {/* <a href="/Register" className="report-button">REPORT</a> */}
+      <a href="/register2" className="report-button">REPORT_duration</a>
     </div>
   );
 };
