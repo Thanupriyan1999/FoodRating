@@ -13,7 +13,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 0px;
+  padding: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -21,46 +21,36 @@ body {
   align-items: center;
   color: rgb(255, 255, 255);
 
+  // Header section
   .header {
-    text-align: left;
-    margin-bottom: 0px;
-  
+    text-align: center;
+    margin-bottom: 20px;
+
     h1 {
-      font-size: 3rem;
+      font-size: 2rem;
       color: #003087;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
       font-weight: bold;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      display: block; // Ensures h1 takes up full width
-      width: 100%;
     }
-  
+
     h3 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #363534;
       padding: 5px 10px;
       background-color: #ffdb6f;
       border-radius: 8px;
-      margin-bottom: 5px;
-      text-align: center;
-      display: block; // Forces it to take up the full line
-      width: 100%;
+      margin-bottom: 15px;
     }
-  
+
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       color: #023a72;
       background-color: #e0e7ef;
       padding: 10px;
       border-radius: 8px;
-      margin-bottom: 15px;
-      text-align: center;
-      display: block; // Forces h2 to take up the full width
-      width: 100%;
     }
   }
-  
-  
 
   // Content section
 .content {
@@ -73,15 +63,15 @@ body {
   .rating-buttons {
     display: flex;
     flex-direction: column;
-    width: 130%;
-    margin-right: 200px;
+    width: 120%;
+    margin-right: 20px;
 
     .rating-button {
       border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 10px 80px;
-      margin-bottom: 30px;
-      font-size: 2rem;
+      padding: 9px 15px;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease;
       display: flex;
@@ -91,9 +81,9 @@ body {
 
       // Emojis
       .emoji-icon {
-        margin-left: 40px;
-        width: 74px;
-        height: 80px;
+        margin-left: 10px;
+        width: 24px;
+        height: 24px;
       }
 
       &.excellent {
@@ -136,11 +126,11 @@ body {
 
     .keypad-display {
       width: 90%;
-      height: 60px;
+      height: 50px;
       background-color: #fff;
       border: 2px solid #ccc;
       border-radius: 8px;
-      font-size: 3rem;
+      font-size: 1.8rem;
       text-align: center;
       line-height: 50px;
       margin-bottom: 15px;
@@ -153,13 +143,13 @@ body {
       grid-gap: 15px;
 
       button {
-        width: 160px;
-        height: 130px;
+        width: 80px;
+        height: 60px;
         background-color: #011427;
         color: #fff;
         border: none;
         border-radius: 10px;
-        font-size: 4rem;
+        font-size: 1.7rem;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -167,7 +157,6 @@ body {
           background-color: #5f6061;
         }
       }
-
 
       .delete {
         background-color: #fa0015;
@@ -178,7 +167,7 @@ body {
       }
 
       .enter {
-        background-color: #00911f;
+        background-color: #01295e;
 
         &:hover {
           background-color: #6c89e9;
@@ -230,7 +219,7 @@ body {
     .content {
       flex-direction: column;
       align-items: center;
-      margin-top: 0px;
+      margin-top: 20px;
 
       .rating-buttons {
         margin-right: 0;
